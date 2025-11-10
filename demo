@@ -1,0 +1,357 @@
+Add_Fragrance_Note_Categories.html
+
+Fragrance Name
+Description
+Key Notes
+Characteristics
+Fragrance Image
+
+Add_Perfumes.html
+
+Perfume_Name
+Brand_Name
+Fragrance_Category
+Description
+Price
+Expiry_Date
+Size
+Perfume_Image
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FRAGRANCE DETAILS</title>
+    <link rel="stylesheet" href="{% static 'Add_Fragrance_Note/css/style1.css' %}">
+</head>
+<body>
+<h1>PERFUME DETAILS</h1>
+<div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="table-responsive pt-3">
+                  <table class="table table-striped project-orders-table">
+                    <thead>
+                      <tr>
+                          <th class="ml-5">PERFUME NAME</th>
+                          <th>BRAND NAME  </th>
+                          <th>FRAGRANCE CATEGORY </th>
+                          <th>DESCRIPTION</th>
+                          <th>PRICE</th>
+                          <th>EXPIRY DATE </th>
+                          <th>SIZE</th>
+                          <th>PERFUME IMAGE</th>
+                          <th>ACTIONS</th>
+                      </tr>
+                    {% for p in data %}
+                    <tr>
+                        <td>{{p.Perfume_Name}}</td>
+                        <td>{{p.}}</td>
+                        <td>{{p.Brand_Name}}</td>
+                        <td>{{p.Fragrance_Category}}</td>
+                        <td>{{p.Description}}</td>
+                        <td>{{p.Price}}</td>
+                        <td>{{p.Expiry_Date}}</td>
+                        <td>{{p.Size}}</td>
+                        <td>{{p.}}</td>
+
+                        <td>
+                            <img class="rounded-image" src="{{p.Perfume_Image.url}}" height="150px" width="150px">
+                        </td>
+                         <td>
+                          <div class="d-flex align-items-center">
+                            <button class="btn btn-success btn-sm btn-icon-text mr-3">
+                              <a class="typcn typcn-edit btn-icon-append" href="#">Edit</a>
+                            </button>
+                            <button class="btn btn-danger btn-sm btn-icon-text">
+                              <a class="typcn typcn-delete-outline btn-icon-append" href="#">Delete</a>
+                            </button>
+                          </div>
+                        </td>
+                    </tr>
+                    </thead>
+                      <tbody>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+</body>
+</html>
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+	<title>Book Shop-About Page</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/icomoon/icomoon.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/css/vendor.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+
+</head>
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+<div id="header-wrap">
+
+		<div class="top-content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="social-links">
+							<ul>
+								<li>
+									<a href="#"><i class="icon icon-facebook"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-twitter"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-youtube-play"></i></a>
+								</li>
+								<li>
+									<a href="#"><i class="icon icon-behance-square"></i></a>
+								</li>
+							</ul>
+						</div><!--social-links-->
+					</div>
+					<div class="col-md-6">
+						<div class="right-element">
+							<a href="#" class="user-account for-buy"><i
+									class="icon icon-user"></i><span>Account</span></a>
+							<a href="#" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:(0
+									$)</span></a>
+
+							<div class="action-menu">
+
+								<div class="search-bar">
+									<a href="#" class="search-button search-toggle" data-selector="#header-wrap">
+										<i class="icon icon-search"></i>
+									</a>
+									<form role="search" method="get" class="search-box">
+										<input class="search-field text search-input" placeholder="Search"
+											type="search">
+									</form>
+								</div>
+							</div>
+
+						</div><!--top-right-->
+					</div>
+
+				</div>
+			</div>
+		</div><!--top-content-->
+
+		<header id="header">
+			<div class="container-fluid">
+				<div class="row">
+
+					<div class="col-md-2">
+						<div class="main-logo">
+							<a href="index.html"><img src="{% static 'web/images/main-logo.png'%}" alt="logo"></a>
+						</div>
+
+					</div>
+
+					<div class="col-md-10">
+
+						<nav id="navbar">
+							<div class="main-menu stellarnav">
+								<ul class="menu-list">
+									<li class="menu-item active"><a href="{% url 'Home_Page'%}">Home</a>
+									</li>
+									<li class="menu-item has-sub">
+										<a href="#pages" class="nav-link">Pages</a>
+
+										<ul>
+											<li class="active"><a href="index.html">Home</a></li>
+											<li><a href="index.html">About</a></li>
+											<li><a href="index.html">Styles</a></li>
+											<li><a href="index.html">Blog</a></li>
+											<li><a href="index.html">Post Single</a></li>
+											<li><a href="index.html">Our Store</a></li>
+											<li><a href="index.html">Product Single</a></li>
+											<li><a href="index.html">Contact</a></li>
+											<li><a href="index.html">Thank You</a></li>
+										</ul>
+
+									</li>
+									<li class="menu-item"><a href="{% url 'About_Page'%}" class="nav-link">About</a></li>
+									<li class="menu-item"><a href="#featured-books" class="nav-link">Featured</a></li>
+									<li class="menu-item"><a href="#popular-books" class="nav-link">Popular</a></li>
+<!--									<li class="menu-item"><a href="#special-offer" class="nav-link">Offer</a></li>-->
+									<li class="menu-item"><a href="#latest-blog" class="nav-link">Articles</a></li>
+<!--									<li class="menu-item"><a href="#download-app" class="nav-link">Download App</a></li>-->
+								</ul>
+
+								<div class="hamburger">
+									<span class="bar"></span>
+									<span class="bar"></span>
+									<span class="bar"></span>
+								</div>
+
+							</div>
+						</nav>
+
+					</div>
+
+				</div>
+			</div>
+		</header>
+
+	</div><!--header-wrap-->
+
+
+  <section class="about-section">
+    <div class="text">
+      <h1>About <br><b>BOOK</b>SAW</h1>
+      <p>
+        Welcome to <b>BOOKSAW</b> — a digital sanctuary for readers and storytellers.
+        We believe books are more than just words; they’re windows into imagination,
+        learning, and life itself.
+      </p>
+      <p>
+        Our mission is to bring together stories from around the world, making them
+        beautifully accessible to everyone. From timeless classics to modern voices,
+        BOOKSAW curates works that inspire curiosity and creativity.
+      </p>
+      <a href="#" class="read-more">READ MORE</a>
+    </div>
+    <div class="image">
+      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80" alt="Books Image">
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 BOOKSAW. All rights reserved.</p>
+  </footer>
+<style>
+    /* Base Style */
+body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 80px;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  letter-spacing: 2px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  letter-spacing: 1px;
+  transition: color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+  color: #d36b4f; /* soft orange-pink accent */
+}
+
+/* About Section */
+.about-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 80px;
+}
+
+.about-section .text {
+  width: 50%;
+}
+
+.about-section .text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  line-height: 1.1;
+  color: #111;
+  margin-bottom: 30px;
+}
+
+.about-section .text p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.about-section .read-more {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  color: #d36b4f;
+  border: 1px solid #d36b4f;
+  padding: 10px 25px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.about-section .read-more:hover {
+  background-color: #d36b4f;
+  color: #fff;
+}
+
+/* Image */
+.about-section .image {
+  width: 40%;
+}
+
+.about-section img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid #eee;
+}
+
+</style>
+</body>
+</html>

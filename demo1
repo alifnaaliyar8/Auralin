@@ -1,0 +1,695 @@
+    Add Fragrance note.html
+
+    <form action="{% url 'Save_Add_Fragrance_Data' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-details">
+            <div class="card-box">
+              <span class="details">NAME OF FRAGRANCE NOTE*</span>
+            <input type="text" placeholder=" Fragrance Note" name="f_name">
+            </div>
+        <div class="card-box">
+            <span class="details">DESCRIPTION*</span>
+            <textarea placeholder="Description" name="f_description" ></textarea>
+        </div>
+
+            <div class="card-box">
+            <span class="details">KEY NOTES*</span>
+            <textarea placeholder="Key Notes" name="f_keynotes" ></textarea>
+        </div>
+
+              <div class="card-box">
+            <span class="details">CHARACTERISTICS *</span>
+            <textarea placeholder="Characteristics" name="f_characteristics" ></textarea>
+        </div>
+             <div class="card-box">
+            <span class="details">COVER IMAGE *</span>
+            <input type="file" placeholder="Cover Image" name="f_image">
+        </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="SUBMIT">
+        </div>
+        </form>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+display_add_fragrances.html
+
+<body>
+<h1>FRAGRANCE DETAILS</h1>
+<div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="table-responsive pt-3">
+                  <table class="table table-striped project-orders-table">
+                    <thead>
+                      <tr>
+                          <th class="ml-5">FRAGRANCE NOTE NAME</th>
+                          <th>FRAGRANCE DESCRIPTION </th>
+                          <th>KEY NOTES</th>
+                          <th>CHARACTERISTICS</th>
+                          <th>FRAGRANCE COVER IMAGE</th>
+                          <th>ACTIONS</th>
+                      </tr>
+                    {% for f in data %}
+                    <tr>
+                        <td>{{f.Fragrance_Name}}</td>
+                        <td>{{f.Description}}</td>
+                        <td>{{f.Key_Notes}}</td>
+                        <td>{{f.Characteristics}}</td>
+                        <td>
+                            <img class="rounded-image" src="{{f.Fragrance_Image.url}}" height="150px" width="150px">
+                        </td>
+                         <td>
+                          <div class="d-flex align-items-center">
+                            <button class="btn btn-success btn-sm btn-icon-text mr-3">
+                              <a class="typcn typcn-edit btn-icon-append" href="{% url 'Edit_Add_Category_Data' fcategory_id=f.id %}">Edit</a>
+                            </button>
+                            <button class="btn btn-danger btn-sm btn-icon-text">
+                              <a class="typcn typcn-delete-outline btn-icon-append" href="{% url 'Delete_Add_Category_Data' fragrance_id=f.id %}">Delete</a>
+                            </button>
+                          </div>
+                        </td>
+                    </tr>
+                    </thead>
+                      <tbody>
+                      </tbody>
+                      {% endfor %}
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+</body>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+edit_add_fragrances.html
+
+<body>
+    <div class="container">
+        <div class="heading">UPDATE FRAGRANCE NOTE CATEGORIES
+         </div>
+    <form action="{% url 'Update_Add_Category_Data' F_id=note.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-details">
+            <div class="card-box">
+              <span class="details">NAME OF FRAGRANCE NOTE*</span>
+            <input type="text" placeholder=" Fragrance Note" name="f_name"  value="{{note.Fragrance_Name}}">
+            </div>
+        <div class="card-box">
+            <span class="details">DESCRIPTION*</span>
+            <textarea placeholder="Description" name="f_description">{{note.Description}}</textarea>
+        </div>
+
+            <div class="card-box">
+            <span class="details">KEY NOTES*</span>
+            <textarea placeholder="Key Notes" name="f_keynotes" >{{note.Key_Notes}}</textarea>
+        </div>
+
+              <div class="card-box">
+            <span class="details">CHARACTERISTICS *</span>
+            <textarea placeholder="Characteristics" name="f_characteristics" >{{note.Characteristics}}</textarea>
+        </div>
+             <div class="card-box">
+            <span class="details">COVER IMAGE *</span>
+                 <img src="{{note.Fragrance_Image.url}}" height="150px" width="150px">
+            <input type="file" placeholder="Cover Image" name="f_image">
+        </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="SUBMIT">
+        </div>
+        </form>
+    </div>
+</body>
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+add_perfumes.html
+
+<body>
+    <div class="container">
+        <div class="heading">ADD PERFUMES
+         </div>
+    <form action="{% url 'Save_Add_Perfumes' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-details">
+            <div class="card-box">
+              <span class="details">PERFUME NAME*</span>
+            <input type="text" placeholder=" Perfume Name" name="p_name">
+            </div>
+
+            <div class="card-box">
+              <span class="details">PERFUME BRAND*</span>
+            <input type="text" placeholder=" Brand Name" name="p_brand">
+            </div>
+
+            <div class="card-box">
+              <span class="details">FRAGRANCE CATEGORY*</span>
+                <select class="form-control" id="exampleSelectGender" name="f_category">
+                          <option selected >Select Category</option>
+                    {% for p in fragrance %}
+                          <option>{{p.Fragrance_Name}}</option>
+                    {% endfor%}
+                        </select>
+            </div>
+
+        <div class="card-box">
+            <span class="details">DESCRIPTION*</span>
+            <textarea placeholder="Description" name="p_description" ></textarea>
+        </div>
+
+             <div class="card-box">
+              <span class="details">PRICE*</span>
+            <input type="number" placeholder=" Price" name="p_price">
+            </div>
+
+              <div class="card-box">
+            <span class="details">EXPIRY DATE*</span>
+            <input type="date" placeholder="Expiry Date" name="e_date">
+        </div>
+
+             <div class="card-box">
+              <span class="details">SIZE*</span>
+            <input type="text" placeholder=" Size" name="p_size">
+            </div>
+
+             <div class="card-box">
+            <span class="details">PERFUME IMAGE *</span>
+            <input type="file" placeholder="Cover Image" name="p_image">
+        </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="SUBMIT">
+        </div>
+        </form>
+    </div>
+
+  <style>
+      select{
+      height: 35px;
+      width:100%;
+      outline: none;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      }
+  </style>
+</body>
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+display_add_perfumes.html
+
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfume Display - Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'Display_Add_Perfume/css/style.css' %}">
+
+</head>
+<body>
+
+  <h2>PERFUME DETAILS</h2>
+
+  <!-- Perfume Cards -->
+  <div class="card-container">
+    {% for p in data %}
+    <div class="perfume-card">
+      <img src="{{p.Perfume_Image.url}}" alt="{{p.Perfume_Name}}">
+      <div class="perfume-details">
+        <h5>{{p.Perfume_Name}}</h5>
+        <p><strong>Brand:</strong> {{p.Brand_Name}}</p>
+        <p><strong>Category:</strong> {{p.Fragrance_Category}}</p>
+        <p><strong>Size:</strong> {{p.Size}}</p>
+        <p><strong>Expiry:</strong> {{p.Expiry_Date}}</p>
+        <p><strong>Description:</strong>  {{p.Description}}</p>
+        <p class="price-tag">₹{{p.Price}} Rs</p>
+        <div class="action-buttons">
+          <a href="{% url 'Edit_Add_Perfumes' perfume_id=p.id %}" class="edit">Edit</a>
+          <a href="{% url 'Delete_Add_Perfumes' pfume_id=p.id %}" class="delete">Delete</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+edit_add_perfumes.html
+
+<body>
+    <div class="container">
+        <div class="heading">UPDATE PERFUMES
+         </div>
+    <form action="{% url 'Update_Add_Perfumes' P_id=perfume.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="card-details">
+            <div class="card-box">
+              <span class="details">PERFUME NAME*</span>
+            <input type="text" placeholder=" Perfume Name" name="p_name" value="{{perfume.Perfume_Name}}">
+            </div>
+
+            <div class="card-box">
+              <span class="details">PERFUME BRAND*</span>
+            <input type="text" placeholder=" Brand Name" name="p_brand" value="{{perfume.Brand_Name}}">
+            </div>
+
+            <div class="card-box">
+              <span class="details">FRAGRANCE CATEGORY*</span>
+                <select class="form-control" id="exampleSelectGender" name="f_category">
+                          <option>{{perfume.Fragrance_Category}}</option>
+                    {% for p in categories %}
+                          <option>{{p.Fragrance_Name}}</option>
+                    {% endfor%}
+                        </select>
+            </div>
+
+        <div class="card-box">
+            <span class="details">DESCRIPTION*</span>
+            <textarea placeholder="Description" name="p_description" >{{perfume.Description}}</textarea>
+        </div>
+
+             <div class="card-box">
+              <span class="details">PRICE*</span>
+            <input type="number" placeholder=" Price" name="p_price" value="{{perfume.Price}}">
+            </div>
+
+              <div class="card-box">
+            <span class="details">EXPIRY DATE*</span>
+            <input type="date" placeholder="Expiry Date" name="e_date" value="{{perfume.Expiry_Date}}">
+        </div>
+
+             <div class="card-box">
+              <span class="details">SIZE*</span>
+            <input type="text" placeholder=" Size" name="p_size" value="{{perfume.Size}}">
+            </div>
+
+             <div class="card-box">
+            <span class="details">PERFUME IMAGE *</span>
+                 <img src="{{perfume.Perfume_Image.url}}" height="150px" width="150px">
+            <input type="file" placeholder="Cover Image" name="p_image">
+        </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="SUBMIT">
+        </div>
+        </form>
+    </div>
+</body>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+index.html
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{% static 'Index_Page/css/style.css' %}">
+
+
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="{% url 'Index_Page' %}" class="active">Dashboard</a>
+
+    <a class="dropdown-btn">
+      Fragrance Note
+      <span class="arrow">▶</span>
+    </a>
+    <div class="dropdown-container">
+      <a href="{% url 'Add_Fragrance_Note_Categories' %}">Add Fragrance Note</a>
+      <a href="{% url 'Display_Add_Category_Data' %}">View Fragrance Note</a>
+    </div>
+
+    <a class="dropdown-btn">
+      Perfumes
+      <span class="arrow">▶</span>
+    </a>
+    <div class="dropdown-container">
+      <a href="{% url 'Add_Perfumes' %}">Add Perfumes</a>
+      <a href="{% url 'Display_Add_Perfumes' %}">View Perfumes</a>
+    </div>
+
+    <a href="#">Users</a>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Dashboard Overview</h1>
+      <div class="logout-container">
+      <a class="logout-link" href="{% url 'Admin_Logout' %}">LOGOUT</a>
+      </div>
+      {% if request.session.username %}
+      <div class="user">
+        <img src="{% static 'Index_Page/images/Auralin_Logo.jpg' %}" alt="Admin" >
+        <span>Welcome, {{request.session.username }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    </div>
+
+  </div>
+  <script src="{% static 'Index_Page/js/script.js' %}"></script>
+<style>
+   .logout-container{
+    text-align: right;
+    padding: 10px 20px;
+   }
+   .logout-link{
+       color:#333;
+       text-decoration:none;
+       font-size: 20px;
+       font-weight:600;
+       cursor: pointer;
+       transition: color 0.3s ease;
+    }
+  .logout-link:hover{
+  color: #e63946;
+  }
+</style>
+</body>
+</html>
+----------------------------------------------------------------------------------------------------------------------------------------------------
+filtered perfumes.html
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ICONS (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="top-offer">
+    <p>"FLAT300" – rupee 300 off on minimum purchase of 6000</p>
+</header>
+<nav class="navbar">
+
+    <!-- Left menu -->
+    <ul class="nav-left">
+        <li><a href="{% url 'Home_Page'%}">HOME</a></li>
+        <li><a href="{% url 'About_Page'%}">ABOUT US</a></li>
+        <li><a href="{% url 'Contact_Page'%}">CONTACT US</a></li>
+    </ul>
+
+    <!-- Center logo -->
+    <div class="logo">
+        <img src="{% static 'web/images/Auralin_Logo.jpg' %}" alt="Logo" height="300px"  width="150px">
+    </div>
+
+    <!-- Right menu -->
+    <ul class="nav-right">
+        <li class="dropdown">
+            <a href="#">CATEGORIES <i class="fa-solid fa-chevron-down"></i></a>
+
+            <ul class="dropdown-menu">
+                {% for f in fragrances%}
+                <li><a href="{% url 'Filtered_Perfumes' %}">{{f.Fragrance_Name}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        <li><a href="{% url 'All_Perfumes'%}">PERFUMES</a></li>
+
+        <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+        <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+    </ul>
+</nav>
+<div class="card-container">
+  <h2>All Perfumes </h2>
+
+  <div class="card-grid">
+     {% for p in pfume %}
+    <div class="card">
+      <img src="{{p.Perfume_Image.url}}" alt="abc">
+      <div class="card-body">
+        <h3>{{p.Perfume_Name}}</h3>
+        <h5>{{p.Fragrance_Category}}</h5>
+        <h5>Rs. {{p.Brand_Name}}</h5>
+        <h5>Rs. {{p.Size}}</h5>
+        <h5>Rs. {{p.Price}}/-</h5>
+
+          <div class="card-actions">
+          <a href="{% url 'Single_Perfume' pfume_id=p.id %}" class="edit-btn">More Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
+
+
+
+
+<style>
+	*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.top-offer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:6px 0;
+    font-size:14px;
+}
+
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 40px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+.nav-left,
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-left li,
+.nav-right li{
+    list-style:none;
+    position:relative;
+}
+
+.nav-left a,
+.nav-right a{
+    text-decoration:none;
+    color:#000;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.nav-left a:hover,
+.nav-right a:hover{
+    color:#7d7d7d;
+}
+
+.logo img{
+    height:55px;
+    pointer-events:none;
+}
+
+/* Dropdown menu */
+.dropdown-menu{
+    position:absolute;
+    top:30px;
+    left:0;
+    background:white;
+    padding:12px 0;
+    border:1px solid #ddd;
+    border-radius:5px;
+    width:160px;
+    display:none;
+    z-index:999;
+}
+
+.dropdown-menu li{
+    padding:8px 15px;
+}
+
+.dropdown-menu li a{
+    color:#000;
+    font-size:14px;
+}
+
+.dropdown-menu li:hover{
+    background:#f4f4f4;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+}
+
+/* Icons */
+.nav-right i{
+    font-size:18px;
+}
+    /* === CARD CONTAINER === */
+.card-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.card-container h2 {
+  font-size: 28px;
+  color: #4a3f35;
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.card-container h2::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: #d6bfa6;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* === CARD GRID LAYOUT === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10px;
+}
+
+/* === CARD STYLE === */
+.card {
+  background: #fffdfb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0e8e0;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 25px rgba(199, 161, 122, 0.25);
+}
+
+/* === CARD IMAGE === */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f0e8e0;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* === CARD BODY === */
+.card-body {
+  padding: 18px 20px;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-size: 18px;
+  color: #4a3f35;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* === CARD ACTION BUTTONS === */
+.card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  box-shadow: 0 3px 10px rgba(199, 161, 122, 0.25);
+  transform: translateY(-2px);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .card img {
+    height: 180px;
+  }
+  .card-body h3 {
+    font-size: 16px;
+  }
+}
+
+
+</style>
+
+</body>
+</html>
+---------------------------------------------------------------------------------------------------------------------
+home all perfumes
+
+
+
+
+<!--<div class="card-container">-->
+<!--  <h2>All Perfumes </h2>-->
+
+<!--  <div class="card-grid">-->
+<!--     {% for p in perfumes %}-->
+<!--    <div class="card">-->
+<!--      <img src="{{p.Perfume_Image.url}}" alt="abc">-->
+<!--      <div class="card-body">-->
+<!--        <h3>{{p.Perfume_Name}}</h3>-->
+<!--        <h5>{{p.Fragrance_Category}}</h5>-->
+<!--        <h5>Rs. {{p.Price}}/-</h5>-->
+
+
+<!--          <div class="card-actions">-->
+<!--          <a href="{% url 'Filtered_Perfumes' perfume_category=p.Fragrance_Category%}" class="edit-btn">View More</a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+
+<!--  </div>-->
+<!--</div>-->

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block title %}Add Fragrance Note{% endblock %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ADD FRAGRANCE NOTE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+{% block content %}
+  <div class="form-wrapper">
+  <h2>ADD FRAGRANCE NOTE</h2>
+  <form action="{% url 'Save_Add_Fragrance_Data' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="row">
+      <div class="form-group">
+        <label>NAME OF FRAGRANCE NOTE</label>
+        <input type="text" name="f_name" placeholder="Fragrance Note" required>
+      </div>
+      <div class="form-group">
+        <label>DESCRIPTION</label>
+        <textarea name="f_description" placeholder="Description"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label>KEY NOTES</label>
+        <textarea name="f_keynotes" placeholder="Key Notes"></textarea>
+      </div>
+      <div class="form-group">
+        <label>CHARACTERISTICS</label>
+        <textarea name="f_characteristics" placeholder="Characteristics"></textarea>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group">
+        <label for="image">COVER IMAGE</label>
+        <input type="file" id="image" name="f_image" required>
+      </div>
+      <div class="form-group">
+        <!-- optional second column empty to keep symmetry -->
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
+
+<style>
+/* ====== FORM CONTAINER ====== */
+.form-wrapper {
+  width: 70%;
+  max-width: 850px;
+  margin: 40px auto;
+  background: #fffdfb;
+  padding: 30px 40px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  font-family: "Poppins", sans-serif;
+  border: 1px solid #f0e8e0;
+}
+
+/* ====== HEADER ====== */
+.form-wrapper h2 {
+  text-align: center;
+  font-size: 26px;
+  color: #4a3f35;
+  margin-bottom: 25px;
+  letter-spacing: 0.5px;
+}
+.form-wrapper h2::after {
+  content: "";
+  width: 60px;
+  height: 3px;
+  background: #d6bfa6;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* ====== ROW LAYOUT (2 FIELDS PER ROW) ====== */
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.row.full {
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ====== FORM GROUP ====== */
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====== LABELS ====== */
+label {
+  font-weight: 600;
+  color: #5a5145;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* ====== INPUTS & TEXTAREAS ====== */
+input[type="text"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d8cfc4;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fdfbf9;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+textarea:focus,
+input[type="file"]:focus {
+  border-color: #c7a17a;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(199,161,122,0.25);
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ====== SUBMIT BUTTON ====== */
+.submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(199,161,122,0.25);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}
+
+  </style>
+{% endblock %}
+
+</body>
+</html>
+
+

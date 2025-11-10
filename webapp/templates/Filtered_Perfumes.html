@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ICONS (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="top-offer">
+    <p>"FLAT300" – rupee 300 off on minimum purchase of 6000</p>
+</header>
+<nav class="navbar">
+
+    <!-- Left menu -->
+    <ul class="nav-left">
+        <li><a href="{% url 'Home_Page'%}">HOME</a></li>
+        <li><a href="{% url 'About_Page'%}">ABOUT US</a></li>
+        <li><a href="{% url 'Contact_Page'%}">CONTACT US</a></li>
+    </ul>
+
+    <!-- Center logo -->
+    <div class="logo">
+        <img src="{% static 'web/images/Auralin_Logo.jpg' %}" alt="Logo" height="300px" width="150px">
+    </div>
+
+    <!-- Right menu -->
+    <ul class="nav-right">
+        <li class="dropdown">
+            <a href="#">CATEGORIES <i class="fa-solid fa-chevron-down"></i></a>
+
+            <ul class="dropdown-menu">
+                {% for f in fragrances%}
+                <li><a href="{% url 'Filtered_Perfumes' %}">{{f.Fragrance_Name}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        <li><a href="{% url 'All_Perfumes'%}">PERFUMES</a></li>
+
+        <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+        <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+    </ul>
+</nav>
+
+<div class="perfume-list-container">
+  <h2 class="perfume-list-title">Perfume Details</h2>
+
+  <div class="perfume-list-grid">
+    {% for p in fume %}
+    <div class="perfume-list-card">
+      <img src="{{p.Perfume_Image.url}}" alt="{{p.Perfume_Name}}" class="perfume-list-image">
+
+      <div class="perfume-list-body">
+        <h3 class="perfume-list-name">{{p.Perfume_Name}}</h3>
+        <h5 class="perfume-list-size">{{p.Fragrance_Category}}</h5>
+        <h5 class="perfume-list-brand">{{p.Brand_Name}}</h5>
+        <h5 class="perfume-list-size">{{p.Size}}</h5>
+        <h5 class="perfume-list-price">₹ {{p.Price}} /-</h5>
+
+        <div class="perfume-list-actions">
+          <a href="{% url 'Single_Perfume' pfume_id=p.id %}" class="perfume-list-btn">More Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<footer class="about-footer">
+    <p>© 2025 Auralin Perfumes | Crafted with Love & Elegance</p>
+  </footer>
+
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.top-offer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:6px 0;
+    font-size:14px;
+}
+
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 40px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+.nav-left,
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-left li,
+.nav-right li{
+    list-style:none;
+    position:relative;
+}
+
+.nav-left a,
+.nav-right a{
+    text-decoration:none;
+    color:#000;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.nav-left a:hover,
+.nav-right a:hover{
+    color:#7d7d7d;
+}
+
+.logo img{
+    height:55px;
+    pointer-events:none;
+}
+.about-footer {
+  background: #3c2f2f;
+  color: #fffaf3;
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+/* Dropdown menu */
+.dropdown-menu{
+    position:absolute;
+    top:30px;
+    left:0;
+    background:white;
+    padding:12px 0;
+    border:1px solid #ddd;
+    border-radius:5px;
+    width:160px;
+    display:none;
+    z-index:999;
+}
+
+.dropdown-menu li{
+    padding:8px 15px;
+}
+
+.dropdown-menu li a{
+    color:#000;
+    font-size:14px;
+}
+
+.dropdown-menu li:hover{
+    background:#f4f4f4;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+}
+
+/* Icons */
+.nav-right i{
+    font-size:18px;
+}
+    /* === CARD CONTAINER === */
+.card-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.card-container h2 {
+  font-size: 28px;
+  color: #4a3f35;
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.card-container h2::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: #d6bfa6;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* === CARD GRID LAYOUT === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10px;
+}
+
+/* === CARD STYLE === */
+.card {
+  background: #fffdfb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0e8e0;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 25px rgba(199, 161, 122, 0.25);
+}
+
+/* === CARD IMAGE === */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f0e8e0;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* === CARD BODY === */
+.card-body {
+  padding: 18px 20px;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-size: 18px;
+  color: #4a3f35;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* === CARD ACTION BUTTONS === */
+.card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  box-shadow: 0 3px 10px rgba(199, 161, 122, 0.25);
+  transform: translateY(-2px);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .card img {
+    height: 180px;
+  }
+  .card-body h3 {
+    font-size: 16px;
+  }
+}
+/* === PERFUME LIST CONTAINER === */
+.perfume-list-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 60px auto;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.perfume-list-title {
+  font-size: 28px;
+  color: #3b2a1a;
+  margin-bottom: 35px;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.perfume-list-title::after {
+  content: "";
+  display: block;
+  height: 3px;
+  width: 70px;
+  margin: 10px auto 0;
+  background: #c7a17a;
+  border-radius: 3px;
+}
+
+/* === GRID LAYOUT === */
+.perfume-list-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10px;
+}
+
+/* === CARD === */
+.perfume-list-card {
+  background: #fffdfb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0e8e0;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.perfume-list-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(180, 140, 100, 0.25);
+}
+
+/* === IMAGE === */
+.perfume-list-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid #f0e8e0;
+  transition: transform 0.3s ease;
+}
+
+.perfume-list-card:hover .perfume-list-image {
+  transform: scale(1.05);
+}
+
+/* === CARD BODY === */
+.perfume-list-body {
+  padding: 18px 20px;
+}
+
+.perfume-list-name {
+  font-size: 18px;
+  color: #3b2a1a;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.perfume-list-brand,
+.perfume-list-size,
+.perfume-list-price {
+  font-size: 14px;
+  color: #6b5a48;
+  margin: 4px 0;
+  text-align: center;
+}
+
+/* === ACTION BUTTON === */
+.perfume-list-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.perfume-list-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.perfume-list-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  box-shadow: 0 3px 10px rgba(199, 161, 122, 0.25);
+  transform: translateY(-2px);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .perfume-list-title {
+    font-size: 24px;
+  }
+
+  .perfume-list-image {
+    height: 180px;
+  }
+
+  .perfume-list-card {
+    border-radius: 10px;
+  }
+}
+
+
+</style>
+
+</body>
+</html>

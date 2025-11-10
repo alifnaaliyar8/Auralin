@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- ICONS (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header class="top-offer">
+    <p>"FLAT300" – rupee 300 off on minimum purchase of 6000</p>
+</header>
+
+<nav class="navbar">
+
+    <!-- Left menu -->
+    <ul class="nav-left">
+        <li><a href="{% url 'Home_Page'%}">HOME</a></li>
+        <li><a href="{% url 'About_Page'%}">ABOUT US</a></li>
+        <li><a href="{% url 'Contact_Page'%}">CONTACT US</a></li>
+    </ul>
+
+    <!-- Center logo -->
+    <div class="logo">
+        <img src="{% static 'web/images/Auralin_Logo.jpg' %}" alt="Logo" height="300px" width="150px">
+    </div>
+
+    <!-- Right menu -->
+    <ul class="nav-right">
+        <li class="dropdown">
+            <a href="#">CATEGORIES <i class="fa-solid fa-chevron-down"></i></a>
+
+            <ul class="dropdown-menu">
+                {% for f in fragrances%}
+                <li><a href="#">{{f.Fragrance_Name}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+
+        <li><a href="{% url 'All_Perfumes'%}">PERFUMES</a></li>
+        <!--        <li><a href="#">SALE</a></li>-->
+        <!--        <li><a href="#">DECANTS/SAMPLES</a></li>-->
+
+        <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+        <li><a href="#"><i class="fa-solid fa-bag-shopping"></i></a></li>
+    </ul>
+</nav>
+
+
+  <section class="about-hero">
+    <div class="overlay"></div>
+    <div class="about-text">
+      <h1>About <span>Auralin Perfumes</span></h1>
+      <p>Discover the story behind our passion for fragrance and luxury.</p>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="about-container">
+      <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1600180758890-6e9b4a4a0d57?auto=format&fit=crop&w=600&q=80" alt="Perfume Bottles">
+      </div>
+      <div class="about-info">
+        <h2>Our Story</h2>
+        <p>
+          At <strong>Auralin Perfumes</strong>, we believe that every fragrance tells a story.
+          Founded with a vision to blend artistry and emotion, our collection celebrates individuality and elegance.
+          Each scent is carefully crafted using the finest ingredients, sourced from around the world,
+          to ensure an unforgettable experience.
+        </p>
+        <p>
+          Whether you seek a soft floral whisper or a bold statement aroma,
+          Essence Perfumes invites you to explore a world of timeless sophistication and sensory delight.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mission-section">
+    <h2>Our Mission</h2>
+    <p>
+      To redefine the art of perfumery by combining tradition with innovation,
+      offering every individual a fragrance that resonates with their personality and emotions.
+    </p>
+
+    <div class="mission-cards">
+      <div class="mission-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/477/477408.png" alt="Quality">
+        <h3>Premium Quality</h3>
+        <p>We use only the purest and most exquisite ingredients from around the world.</p>
+      </div>
+      <div class="mission-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" alt="Sustainability">
+        <h3>Sustainability</h3>
+        <p>Our commitment extends to sustainable sourcing and eco-friendly packaging.</p>
+      </div>
+      <div class="mission-card">
+        <img src="https://cdn-icons-png.flaticon.com/512/4151/4151022.png" alt="Innovation">
+        <h3>Innovation</h3>
+        <p>Blending creativity with craftsmanship to create unique signature scents.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="about-footer">
+    <p>© 2025 Auralin Perfumes | Crafted with Love & Elegance</p>
+  </footer>
+
+</body>
+
+<style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.top-offer{
+    background:#000;
+    color:white;
+    text-align:center;
+    padding:6px 0;
+    font-size:14px;
+}
+
+.navbar{
+    width:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 40px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+.nav-left,
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.nav-left li,
+.nav-right li{
+    list-style:none;
+    position:relative;
+}
+
+.nav-left a,
+.nav-right a{
+    text-decoration:none;
+    color:#000;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.nav-left a:hover,
+.nav-right a:hover{
+    color:#7d7d7d;
+}
+
+.logo img{
+    height:55px;
+    pointer-events:none;
+}
+
+/* Dropdown menu */
+.dropdown-menu{
+    position:absolute;
+    top:30px;
+    left:0;
+    background:white;
+    padding:12px 0;
+    border:1px solid #ddd;
+    border-radius:5px;
+    width:160px;
+    display:none;
+    z-index:999;
+}
+
+.dropdown-menu li{
+    padding:8px 15px;
+}
+
+.dropdown-menu li a{
+    color:#000;
+    font-size:14px;
+}
+
+.dropdown-menu li:hover{
+    background:#f4f4f4;
+}
+
+.dropdown:hover .dropdown-menu{
+    display:block;
+}
+
+/* Icons */
+.nav-right i{
+    font-size:18px;
+}
+    /* === CARD CONTAINER === */
+.card-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.card-container h2 {
+  font-size: 28px;
+  color: #4a3f35;
+  margin-bottom: 25px;
+  position: relative;
+  display: inline-block;
+}
+
+.card-container h2::after {
+  content: "";
+  width: 70px;
+  height: 3px;
+  background: #d6bfa6;
+  display: block;
+  margin: 8px auto 0;
+  border-radius: 2px;
+}
+
+/* === CARD GRID LAYOUT === */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  align-items: stretch;
+  padding: 10px;
+}
+
+/* === CARD STYLE === */
+.card {
+  background: #fffdfb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0e8e0;
+  transition: all 0.35s ease;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 25px rgba(199, 161, 122, 0.25);
+}
+
+/* === CARD IMAGE === */
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #f0e8e0;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* === CARD BODY === */
+.card-body {
+  padding: 18px 20px;
+  flex: 1;
+}
+
+.card-body h3 {
+  font-size: 18px;
+  color: #4a3f35;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* === CARD ACTION BUTTONS === */
+.card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.edit-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  box-shadow: 0 3px 10px rgba(199, 161, 122, 0.25);
+  transform: translateY(-2px);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .card img {
+    height: 180px;
+  }
+  .card-body h3 {
+    font-size: 16px;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background: #fffaf7;
+  line-height: 1.7;
+}
+
+/* ===== Hero Section ===== */
+.about-hero {
+  position: relative;
+  height: 60vh;
+  background: url('https://images.unsplash.com/photo-1596464716121-1c43e06d6a4d?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.about-hero .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.about-hero .about-text {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.about-hero h1 {
+  font-size: 42px;
+  letter-spacing: 2px;
+}
+
+.about-hero h1 span {
+  color: #e0b973;
+}
+
+.about-hero p {
+  font-size: 18px;
+  margin-top: 10px;
+  color: #f3f3f3;
+}
+
+/* ===== About Content ===== */
+.about-content {
+  padding: 70px 10%;
+  background: #fffdfb;
+}
+
+.about-container {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.about-image img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 15px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+}
+
+.about-info h2 {
+  font-size: 30px;
+  color: #4b382a;
+  margin-bottom: 15px;
+}
+
+.about-info p {
+  margin-bottom: 15px;
+  color: #5a4b3b;
+}
+
+/* ===== Mission Section ===== */
+.mission-section {
+  background: #fef7f2;
+  text-align: center;
+  padding: 80px 10%;
+}
+
+.mission-section h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  color: #4b382a;
+}
+
+.mission-section p {
+  max-width: 750px;
+  margin: 0 auto 50px;
+  color: #5c5045;
+}
+
+.mission-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.mission-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  width: 300px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mission-card img {
+  width: 60px;
+  margin-bottom: 15px;
+}
+
+.mission-card h3 {
+  color: #3c2f2f;
+  margin-bottom: 10px;
+}
+
+.mission-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+/* ===== Footer ===== */
+.about-footer {
+  background: #3c2f2f;
+  color: #fffaf3;
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-image img {
+    max-width: 100%;
+  }
+
+  .mission-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+</style>
+
+</body>
+</html>

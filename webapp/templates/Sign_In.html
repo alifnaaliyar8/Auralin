@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <div class="auth-page-container">
+    <div class="auth-page-card">
+      <h2 class="auth-page-title">Welcome Back</h2>
+
+      <form method="POST" action="{% url 'Login' %}">
+        {% csrf_token %}
+        <div class="auth-page-input-group">
+          <label>Username</label>
+          <input type="text" name="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="auth-page-input-group">
+          <label>Password</label>
+          <input type="password" name="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="auth-page-btn">Sign In</button>
+      </form>
+
+      <p class="auth-page-text">
+        Don’t have an account?
+        <a href="{% url 'Sign_Up' %}" class="auth-page-link">Sign Up</a>
+      </p>
+    </div>
+  </div>
+<style>
+    /* === AUTH PAGE STYLING === */
+body {
+  background: linear-gradient(135deg, #f6f2ee, #fefbf9);
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* === CARD CONTAINER === */
+.auth-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-page-card {
+  background: #ffffff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.auth-page-card:hover {
+  transform: translateY(-5px);
+}
+
+/* === TITLE === */
+.auth-page-title {
+  font-size: 26px;
+  color: #3b2a1a;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* === INPUT FIELDS === */
+.auth-page-input-group {
+  text-align: left;
+  margin-bottom: 18px;
+}
+
+.auth-page-input-group label {
+  display: block;
+  color: #6b5a48;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.auth-page-input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd3c4;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background-color: #fdfaf7;
+  transition: 0.3s ease;
+}
+
+.auth-page-input-group input:focus {
+  border-color: #c7a17a;
+  box-shadow: 0 0 5px rgba(199, 161, 122, 0.4);
+}
+
+/* === BUTTON === */
+.auth-page-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #d6bfa6, #c7a17a);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-page-btn:hover {
+  background: linear-gradient(135deg, #c7a17a, #b28b68);
+  box-shadow: 0 3px 10px rgba(199, 161, 122, 0.3);
+  transform: translateY(-2px);
+}
+
+/* === TEXT LINKS === */
+.auth-page-text {
+  font-size: 14px;
+  margin-top: 18px;
+  color: #5b4a3a;
+}
+
+.auth-page-link {
+  color: #b28451;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.auth-page-link:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 500px) {
+  .auth-page-card {
+    padding: 30px 25px;
+  }
+}
+
+</style>
+</body>
+</html>

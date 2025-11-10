@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Admin Dashboard{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== GLOBAL STYLES ===== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      background: #f7f5f2;
+      height: 100vh;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #c7a17a, #b28b68);
+      color: #fff;
+      padding: 20px 0;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: #fff;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-left: 4px solid #fff;
+    }
+
+    /* ===== DROPDOWN ===== */
+    .dropdown-btn {
+      cursor: pointer;
+      padding: 12px 20px;
+      font-weight: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s ease;
+    }
+
+    .dropdown-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .arrow {
+      font-size: 14px;
+      transition: transform 0.3s ease;
+    }
+
+    .dropdown-container {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 20px;
+    }
+
+    .dropdown-container a {
+      padding: 10px 20px;
+      font-size: 14px;
+      color: #f0f0f0;
+    }
+
+    .dropdown-container a:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    /* Rotate arrow when open */
+    .dropdown-btn.active .arrow {
+      transform: rotate(90deg);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main-content {
+      margin-left: 250px;
+      padding: 30px;
+      flex: 1;
+      overflow-y: auto;
+      transition: all 0.3s ease;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      color: #4a3f35;
+      font-size: 28px;
+    }
+
+    .logout-link {
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .logout-link:hover {
+      color: #e63946;
+    }
+
+    /* ===== DASHBOARD CARDS ===== */
+    .cards-container {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: #fff;
+      flex: 1 1 300px;
+      border-radius: 14px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 25px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 1px solid #f0e8e0;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .card h3 {
+      font-size: 22px;
+      color: #5a5145;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 18px;
+      color: #c7a17a;
+      font-weight: 600;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+      .main-content {
+        margin-left: 200px;
+      }
+      .cards-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="{% url 'Index_Page' %}" class="active">Dashboard</a>
+
+    <div class="dropdown-btn">
+      Fragrance Note
+      <span class="arrow">▶</span>
+    </div>
+    <div class="dropdown-container">
+      <a href="{% url 'Add_Fragrance_Note_Categories' %}">Add Fragrance Note</a>
+      <a href="{% url 'Display_Add_Category_Data' %}">View Fragrance Note</a>
+    </div>
+
+    <div class="dropdown-btn">
+      Perfumes
+      <span class="arrow">▶</span>
+    </div>
+    <div class="dropdown-container">
+      <a href="{% url 'Add_Perfumes' %}">Add Perfumes</a>
+      <a href="{% url 'Display_Add_Perfumes' %}">View Perfumes</a>
+    </div>
+
+    <a href="#">Users</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="header">
+<!--      <h1>Dashboard Overview</h1>-->
+
+     {% if request.session.username %}
+      <a class="logout-link" href="{% url 'Admin_Logout' %}"> <span>Welcome, {{request.session.username }}/ Logout</span></a>
+        {% else %}
+      <a class="logout-link" href="{% url 'Admin_Login_Page' %}">Login</a>
+{% endif %}
+      </div>
+{% block content %}
+
+    <div class="cards-container">
+      <div class="card">
+        <h3>Total Fragrance Notes</h3>
+        <p>{{ frag }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Perfumes</h3>
+        <p>{{ pfum }}</p>
+      </div>
+    </div>
+ {% endblock %}
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const dropdowns = document.querySelectorAll(".dropdown-btn");
+    dropdowns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        // Close all other dropdowns
+        dropdowns.forEach(otherBtn => {
+          if (otherBtn !== btn) {
+            otherBtn.classList.remove("active");
+            otherBtn.nextElementSibling.style.display = "none";
+          }
+        });
+
+        // Toggle current dropdown
+        btn.classList.toggle("active");
+        const container = btn.nextElementSibling;
+        container.style.display =
+          container.style.display === "block" ? "none" : "block";
+      });
+    });
+  </script>
+
+</body>
+</html>

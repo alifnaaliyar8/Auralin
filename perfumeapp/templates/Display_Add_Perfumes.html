@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{% extends 'Index.html' %}
+{% block title %}Display Perfumes{% endblock %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>View Perfumes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+{% block content %}
+<h1 class="perfume-title">All Perfume Collections</h1>
+
+<div class="perfume-grid-container">
+  {% for p in data %}
+  <div class="perfume-item">
+    <img src="{{p.Perfume_Image.url}}" alt="{{p.Perfume_Image}}" class="perfume-img">
+
+    <div class="perfume-info">
+      <h3 class="perfume-name">{{p.Perfume_Name}}</h3>
+      <p><b>Brand:</b> {{p.Brand_Name}}</p>
+      <p><b>Category:</b> {{p.Fragrance_Category}}</p>
+      <p><b>Price:</b> ₹ {{p.Price}} Rs</p>
+      <p><b>Size:</b> {{p.Size}}</p>
+      <p><b>Expiry:</b> {{p.Expiry_Date}}</p>
+      <p class="perfume-desc"><b>Description:</b> {{p.Description}}</p>
+    </div>
+
+    <div class="perfume-actions">
+      <a href="{% url 'Edit_Add_Perfumes' perfume_id=p.id %}">
+        <button class="perfume-btn edit">Edit</button>
+      </a>
+      <a href="{% url 'Delete_Add_Perfumes' pfume_id=p.id %}" onclick="return confirm('Are you sure you want to delete this perfume?');">
+        <button class="perfume-btn delete">Delete</button>
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+
+<style>
+/* ===== TITLE ===== */
+.perfume-title {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: #3b2a1f;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.perfume-title::after {
+  content: "";
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, #d4b483, #cda167);
+  display: block;
+  margin: 10px auto 0;
+  border-radius: 3px;
+}
+
+/* ===== GRID CONTAINER ===== */
+.perfume-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 40px 50px;
+  background: #faf8f4;
+  justify-items: center;
+}
+
+/* ===== CARD ===== */
+.perfume-item {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 320px;
+  min-height: 580px; /* enough height to fit description */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.perfume-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 24px rgba(210, 173, 112, 0.35);
+}
+
+/* ===== IMAGE ===== */
+.perfume-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* ===== INFO SECTION ===== */
+.perfume-info {
+  padding: 15px 18px;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.perfume-name {
+  text-align: center;
+  font-size: 18px;
+  color: #3a2d23;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.perfume-info p {
+  font-size: 14px;
+  color: #4f4539;
+  line-height: 1.5;
+  margin: 5px 0;
+}
+
+/* Show full description — no limit or scroll */
+.perfume-desc {
+  color: #6e5f50;
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.perfume-actions {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px;
+  border-top: 1px solid #f0e8dc;
+  background: #fffaf2;
+}
+
+.perfume-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.perfume-btn.edit {
+  background: linear-gradient(135deg, #caa35d, #e0bc85);
+}
+
+.perfume-btn.edit:hover {
+  background: linear-gradient(135deg, #b7883a, #caa35d);
+  transform: scale(1.05);
+}
+
+.perfume-btn.delete {
+  background: linear-gradient(135deg, #e26a5a, #f08d7b);
+}
+
+.perfume-btn.delete:hover {
+  background: linear-gradient(135deg, #d15042, #e26a5a);
+  transform: scale(1.05);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .perfume-grid-container {
+    padding: 20px;
+  }
+
+  .perfume-item {
+    max-width: 100%;
+    min-height: auto;
+  }
+}
+
+  </style>
+{% endblock %}
+
+</body>
+</html>

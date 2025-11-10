@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color:linear-gradient(135deg,#05073a, #dc0606ca);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.card {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.table-responsive {
+    padding: 20px;
+}
+
+.project-orders-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.project-orders-table th {
+    background-color: #ffcccc;
+    color: #fff;
+    padding: 10px;
+    text-align: left;
+}
+
+.project-orders-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.project-orders-table td img {
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.btn-success {
+    background-color: rgba(255,99, 71,0.5);
+    border-color: white;
+}
+
+.btn-danger {
+    background-color: rgba(255,99, 71,0.5);
+    border-color: white;
+}
+
+.btn-icon-text {
+    display: flex;
+    align-items: center;
+}
+
+.btn-icon-append {
+    margin-left: 5px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.d-flex {
+    display: flex;
+    align-items:center;
+}
+.rounded-image {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 100px;
+    height:100px;
+}
