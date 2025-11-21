@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from perfumeapp.models import FragranceDB, PerfumesDB
-from webapp.models import RegisterDB
+from webapp.models import RegisterDB,ContactDB
 
 
 # Create your views here.
@@ -10,12 +10,15 @@ def home_page(request):
     return render(request, "Home_Page.html",
         {'fragrances':fragrances,'perfumes':perfumes})
 def about_page(request):
-    return render(request, "About.html")
+    fragrances =FragranceDB.objects.all()
+    return render(request, "About.html", {'fragrances':fragrances})
 def contact_page(request):
-    return render(request, "Contact_Page.html")
+    fragrances =FragranceDB.objects.all()
+    return render(request, "Contact_Page.html", {'fragrances':fragrances})
 def all_perfumes_page(request):
+    fragrances =FragranceDB.objects.all()
     perfumes= PerfumesDB.objects.all()
-    return render(request, "All_Perfumes.html", {'perfumes':perfumes})
+    return render(request, "All_Perfumes.html", {'perfumes':perfumes,'fragrances':fragrances})
 def filtered_perfume_page(request,perfume_category):
     fume = PerfumesDB.objects.filter(Fragrance_Category=perfume_category)
     return render(request, "Filtered_Perfumes.html", {'fume':fume})
@@ -59,5 +62,19 @@ def user_logout(request):
     del request.session['Password']
     return redirect(home_page)
 
+def contact_us_save(request):
+    if request.method =="POST":
+        NAME =request.POST.get('u_name')
+        EMAIL =request.POST.get('u_email')
+        SUBJECT =request.POST.get('u_subject')
+        MESSAGE =request.POST.get('u_message')
+        obj= ContactDB(Name=NAME,Email=EMAIL, Subject=SUBJECT, Message=MESSAGE)
+        obj.save()
+        return redirect(contact_page)
 
-
+def cart_page(request):
+    fragrances = FragranceDB.objects.all()
+    return render(request,"Cart.html", {'fragrances':fragrances})
+def checkout_page(request):
+    fragrances = FragranceDB.objects.all()
+    return render(request,"Checkout.html", {'fragrances':fragrances})

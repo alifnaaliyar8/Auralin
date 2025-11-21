@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+{% extends 'index.html'%}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Messages</title>
+</head>
+<body>
+<h1>Messages</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="table-responsive pt-3">
+                <table class="table table-striped project-orders-table">
+                    <thead>
+                    <tr>
+                        <th class="ml-5">User Name</th>
+                        <th>User Email</th>
+                        <th> Subject</th>
+                        <th> Message</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for m in data %}
+                    <tr>
+                        <td data-label="User Name">{{m.Name}}</td>
+                        <td data-label="Email">{{m.Email}}</td>
+                        <td data-label="Subject">{{m.Subject}}</td>
+                        <td data-label="Message">{{m.Message}}</td>
+                        <td data-label="Action">
+                            <button class="btn btn-danger">
+                                <a href="{% url 'Delete_Messages' msg_id=m.id %}">Delete</a>
+                            </button>
+                        </td>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<style>
+    /* CARD STYLE */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* TABLE TITLE */
+h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* TABLE STYLE */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.table thead {
+    background: #b28a45;  /* gold shade */
+    color: white;
+    font-size: 16px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: center;
+}
+
+.table tbody tr {
+    transition: 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* DELETE BUTTON */
+.btn-danger {
+    background: #d9534f;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: #b03632;
+}
+
+.btn-danger a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+/* RESPONSIVE TABLE */
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+
+    .table tr {
+        display: block;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+    }
+
+    .table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        color: #333;
+    }
+}
+
+</style>
+</html>
+{% endblock %}

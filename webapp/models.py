@@ -6,3 +6,17 @@ class RegisterDB(models.Model):
     Password = models.CharField(max_length=100,null=True,blank=True)
     Conform_Password = models.CharField(max_length=100,null=True,blank=True)
     Email = models.EmailField(null=True, blank=True)
+
+class ContactDB(models.Model):
+    Name = models.CharField(max_length=50,null=True,blank=True)
+    Email = models.EmailField(null=True, blank=True)
+    Subject = models.CharField(max_length=50,null=True,blank=True)
+    Message = models.TextField(null=True, blank=True)
+
+class CartDB(models.Model):
+    User_name =models.CharField(max_length=50,null=True,blank=True)
+    Perfume_Name =models.CharField(max_length=50,null=True,blank=True)
+    Quantity = models.PositiveIntegerField()
+    Price =  models.PositiveIntegerField()
+    Total_Price = models.PositiveIntegerField()
+    Perfume_Image = models.ImageField(upload_to="Cart Images", null=True, blank=True)

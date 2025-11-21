@@ -4,12 +4,14 @@ from django.core.files.storage import FileSystemStorage
 from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
+from webapp.models import ContactDB
 
 # Create your views here.
 def index_page(request):
     frag =FragranceDB.objects.count()
     pfum = PerfumesDB.objects.count()
-    return render(request, "Index.html",{'frag':frag,'pfum':pfum,})
+    msgs = ContactDB.objects.count()
+    return render(request, "Index.html",{'frag':frag,'pfum':pfum,'msgs':msgs})
 def add_category(request):
     return render(request, "Add_Fragrance_Note_Categories.html")
 def save_add_category(request):
@@ -114,3 +116,13 @@ def admin_logout(request):
     del request.session['username']
     del request.session['password']
     return redirect(index_page)
+
+def view_messages(request):
+    data = ContactDB.objects.all()
+
+    return render(request, "View_Messages.html",{'data':data})
+
+def delete_message_data(request,msg_id):
+    data = ContactDB.objects.filter(id=msg_id)
+    data.delete()
+    return redirect(view_messages)

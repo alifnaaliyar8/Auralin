@@ -20,7 +20,10 @@ urlpatterns = [
 
     path('Admin_Login_Page/',views.admin_login,name="Admin_Login_Page"),
     path('Admin_Login_Check/',views.admin_login_check, name="Admin_Login_Check"),
-    path('Admin_Logout/',views.admin_logout,name="Admin_Logout")
+    path('Admin_Logout/',views.admin_logout,name="Admin_Logout"),
+
+    path('View_Messages/', views.view_messages, name="View_Messages"),
+    path('Delete_Messages/<int:msg_id>/', views.delete_message_data, name="Delete_Messages"),
 
 ]
  

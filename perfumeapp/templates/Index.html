@@ -203,6 +203,14 @@
       <a href="{% url 'Display_Add_Perfumes' %}">View Perfumes</a>
     </div>
 
+     <div class="dropdown-btn">
+      Messages
+      <span class="arrow">▶</span>
+    </div>
+    <div class="dropdown-container">
+      <a href="{% url 'View_Messages' %}">View Messages</a>
+    </div>
+
     <a href="#">Users</a>
   </div>
 
@@ -227,6 +235,10 @@
       <div class="card">
         <h3>Total Perfumes</h3>
         <p>{{ pfum }}</p>
+      </div>
+        <div class="card">
+        <h3>Total Messages Recieved</h3>
+        <p>{{ msgs }}</p>
       </div>
     </div>
  {% endblock %}
