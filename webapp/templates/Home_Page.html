@@ -52,9 +52,15 @@
         {% else %}
         <li><a href="{% url 'Login_Page' %}">Login<i class="fa-solid fa-user"></i></a></li>
         {% endif%}
+        {% if request.session.User_Name %}
         <li><a href="{% url 'Cart_Page' %}"><i class="fa-solid fa-bag-shopping"></i></a></li>
+        {% endif%}
+
     </ul>
 </nav>
+
+
+
 <div class="card-container">
     <h2>All Fragrance Notes</h2>
 

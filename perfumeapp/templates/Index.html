@@ -217,6 +217,7 @@
   <!-- MAIN CONTENT -->
   <div class="main-content">
     <div class="header">
+
 <!--      <h1>Dashboard Overview</h1>-->
 
      {% if request.session.username %}
@@ -226,6 +227,7 @@
 {% endif %}
       </div>
 {% block content %}
+    <a href="{% url 'Home_Page' %}" class="active">Dashboard</a>
 
     <div class="cards-container">
       <div class="card">

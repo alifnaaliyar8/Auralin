@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#header" tabindex="0">
+
+<div id="header-wrap">
+
+    <div class="top-content">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="right-element">
+                        {% if request.session.User_Name%}
+                        <a href="{% url 'Logout' %}" class="user-account for-buy">
+                            <i
+                                    class="icon icon-user"></i><span>Welcome {{request.session.User_Name }} / Logout</span>
+                        </a>
+                        {% else %}
+                        <a href="{% url 'Login_Page' %}" class="user-account for-buy"><i
+                                class="icon icon-user"></i><span>Login</span>
+                        </a>
+                        {% endif %}
+
+                        {% if request.session.User_Name %}
+                        <a href="{% url 'Cart_Page' %}" class="cart for-buy"><i class="icon icon-clipboard"></i><span>Cart:({{cart_total}})</span></a>
+                        {% endif %}
+
+
+                    </div><!--top-right-->
+                </div>
+
+            </div>
+        </div>
+    </div><!--top-content-->
+
+
+
+</div><!--header-wrap-->
+
+    <!-- Bootstrap -->
+
+
+<div class="payment-container">
+    <h3 class="text-center mb-4">Choose Payment Method</h3>
+
+    <!-- ORDER SUMMARY -->
+    <div class="mb-4">
+        <h5>Order Summary</h5>
+        <hr>
+        <p class="d-flex justify-content-between">
+            <span>Subtotal:</span>
+            <strong>₹{{ sub_total }}</strong>
+        </p>
+
+        <p class="d-flex justify-content-between">
+            <span>Delivery Charge:</span>
+            <strong>₹{{ delivery_charge }}</strong>
+        </p>
+
+        <p class="d-flex justify-content-between fs-5">
+            <span>Total Amount:</span>
+            <strong>₹{{ total_amount }}</strong>
+        </p>
+    </div>
+
+    <!-- PAYMENT OPTIONS FORM -->
+    <form action="#" method="POST">
+        {% csrf_token %}
+
+        <input type="hidden" name="Total" value="{{ total_amount }}">
+
+        <!-- Option 1 -->
+        <label class="payment-option d-flex align-items-center">
+            <input type="radio" name="payment_method" value="COD" required>
+            <span>Cash on Delivery (COD)</span>
+        </label>
+
+        <!-- Option 2 -->
+        <label class="payment-option d-flex align-items-center">
+            <input type="radio" name="payment_method" value="Razorpay">
+            <span>Razorpay Online Payment</span>
+        </label>
+
+        <!-- Option 3 -->
+        <label class="payment-option d-flex align-items-center">
+            <input type="radio" name="payment_method" value="Card">
+            <span>Credit / Debit Card</span>
+        </label>
+
+        <!-- Option 4 -->
+        <label class="payment-option d-flex align-items-center">
+            <input type="radio" name="payment_method" value="UPI">
+            <span>UPI Payment (Google Pay / PhonePe)</span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-pay mt-3">Proceed to Pay</button>
+
+    </form>
+</div>
+<script src="https://checkout.razorpay.com/v1/checkout.js"
+    data-key="rzp_test_0ib0jPwwZ7I1lT"
+    data-amount="{{payy_str}}"
+    data-currency="INR"
+    data-order_id="{{payment.order_id}}"
+    data-buttontext=""
+    data-name="Auralin"
+    data-description="Your description"
+    data-image=""
+    data-prefill.name="abc"
+    data-prefill.email="abc@gmail.com"
+    data-theme.color="#002f8c"
+ >
+</script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {% if messages %}
+        {% for i in messages%}
+            {% if i.tags == 'success' %}
+                <script>
+                    swal('{{i}}', '', 'success')
+                </script>
+
+            {% elif i.tags == 'warning' %}
+                <script>
+                    swal('{{i}}', '', 'warning')
+                </script>
+
+            {% elif i.tags == 'info' %}
+                <script>
+                    swal('{{i}}', '', 'info')
+                </script>
+
+            {% else %}
+                <script>
+                    swal('{{i}}', '', 'error')
+                </script>
+            {% endif %}
+        {% endfor%}
+    {% endif %}
+
+<style>
+       /* HEADER WRAPPER */
+    #header-wrap {
+        background: linear-gradient(to right, #002f8c, #004aad);
+        padding: 10px 0;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* TOP CONTENT SPACING */
+    .top-content {
+        padding: 5px 0;
+    }
+
+    /* RIGHT ELEMENT CONTAINER */
+    .right-element {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        justify-content: flex-end;
+        font-size: 15px;
+    }
+
+    /* HEADER LINKS */
+    .right-element a {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        transition: 0.3s ease;
+    }
+
+    .right-element a:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-2px);
+    }
+
+    /* ICONS */
+    .right-element i {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+
+    /* WELCOME TEXT */
+    .user-account span {
+        font-size: 14.5px;
+        letter-spacing: 0.3px;
+    }
+
+    /* CART STYLE */
+    .cart span {
+        background: #ffcc00;
+        color: #000;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-weight: 600;
+        margin-left: 5px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 576px) {
+        .right-element {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+    }
+    body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #dbe7ff, #f5faff);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* MAIN CARD */
+    .payment-container {
+        max-width: 650px;
+        background: #ffffff;
+        margin: 50px auto;
+        padding: 35px 40px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 50, 0.15);
+        border: 2px solid #e6ecff;
+        animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HEADINGS */
+    h3 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-weight: 700;
+        color: #004aad;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    h5 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #1c1c1c;
+        margin-bottom: 15px;
+    }
+
+    /* ORDER SUMMARY */
+    .payment-container p {
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .payment-container strong {
+        color: #004aad;
+    }
+
+    hr {
+        border: 0;
+        height: 2px;
+        background: linear-gradient(to right, #004aad, transparent);
+        margin: 12px 0 20px;
+    }
+
+    /* PAYMENT OPTIONS */
+    .payment-option {
+        display: flex;
+        align-items: center;
+        background: #f4f6ff;
+        padding: 14px;
+        border-radius: 15px;
+        margin: 12px 0;
+        transition: 0.3s ease;
+        border: 2px solid transparent;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .payment-option:hover {
+        background: #e7ecff;
+        border-color: #004aad;
+        transform: scale(1.02);
+    }
+
+    .payment-option input[type="radio"] {
+        transform: scale(1.4);
+        margin-right: 15px;
+        accent-color: #004aad;
+    }
+
+    /* BUTTON */
+    .btn-pay {
+        width: 100%;
+        background: linear-gradient(135deg, #004aad, #002f70);
+        border: none;
+        padding: 14px;
+        font-size: 20px;
+        font-weight: 700;
+        color: #fff;
+        border-radius: 15px;
+        margin-top: 20px;
+        letter-spacing: 0.5px;
+        transition: 0.3s;
+        box-shadow: 0 10px 20px rgba(0, 74, 173, 0.25);
+    }
+
+    .btn-pay:hover {
+        background: linear-gradient(135deg, #003a8a, #001f50);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(0, 60, 140, 0.35);
+    }
+
+    /* MOBILE RESPONSIVE */
+    @media (max-width: 480px) {
+        .payment-container {
+            padding: 25px 20px;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        .btn-pay {
+            font-size: 18px;
+        }
+    }
+</style>
+
+
+</body>
+</html>

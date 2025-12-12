@@ -5,6 +5,7 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login
 from webapp.models import ContactDB
+from django.contrib import messages
 
 # Create your views here.
 def index_page(request):

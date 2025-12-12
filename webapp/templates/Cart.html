@@ -22,18 +22,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                        {% for p in perfumes %}
                         <tr class="text-center">
-                            <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                            <td class="product-remove"><a href="#"><span class="ion-ios-close"></span>
+                            </a></td>
 
                             <td class="image-prod">
                                 <div class="img"></div>
                             </td>
 
                             <td class="product-name">
-                                <h3>Perfume 1</h3>
+                                <h3>{{p.Perfume_Name}}</h3>
                             </td>
 
-                            <td class="price" data-label="Price">1570</td>
+                            <td class="price" data-label="Price">{{p.Price}}</td>
                             <td class="quantity" data-label="Quantity">
 
                                 <div class="input-group mb-3">
@@ -44,6 +46,7 @@
 
                             <td class="total">1570</td>
                         </tr><!-- END TR-->
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -55,20 +58,16 @@
                 <h3>Cart Totals</h3>
                 <p class="d-flex">
                     <span>Subtotal</span>
-                    <span>$20.60</span>
+                    <span>₹ {{sub_total}}</span>
                 </p>
                 <p class="d-flex">
                     <span>Delivery</span>
-                    <span>$0.00</span>
-                </p>
-                <p class="d-flex">
-                    <span>Discount</span>
-                    <span>$3.00</span>
+                    <span>₹ {{delivery_charge}}</span>
                 </p>
                 <hr>
                 <p class="d-flex total-price">
                     <span>Total</span>
-                    <span>$17.60</span>
+                    <span>₹ {{total_amount}}</span>
                 </p>
             </div>
             <p><a href="{% url 'Checkout_Page' %}" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>

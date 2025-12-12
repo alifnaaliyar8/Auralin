@@ -73,46 +73,45 @@
 
     </div>
     <!-- ====== FORM ====== -->
-    <form method="POST" action="#" class="perfume-form">
+        {% if request.session.User_Name %}
+
+    <form method="POST" action="{% url 'Save_To_Cart' %}" class="perfume-form">
         {% csrf_token %}
         <input type="hidden" name="perfume_name" value="{{pfume.Perfume_Name}}">
         <input type="hidden" name="price" value="{{pfume.Price}}">
-        <input type="hidden" name="username" value="{{request.session.username}}">
+        <input type="hidden" name="username" value="{{request.session.User_Name}}">
 
         <div class="form-group">
             <label>Quantity</label>
-            <input type="number" name="quantity" class="form-control" min="1" required>
+            <input type="number" id="quantity" name="quantity" class="form-control" min="1" >
         </div>
 
         <div class="form-group">
             <label>Total Price</label>
             <input type="number" id="total_price" name="total" class="form-control" readonly>
         </div>
-        {% if request.session.User_Name %}
         <button class="form-btn" type="submit">Add to Cart</button>
+    </form>
+
         {% else %}
         <p class="login-text">Please Login to shop</p>
         <a href="{% url 'Login_Page' %}" class="login-btn">Login</a>
         {% endif %}
-    </form>
 </div>
 
 <footer class="about-footer">
     <p>© 2025 Auralin Perfumes | Crafted with Love & Elegance</p>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-    const qty = document.querySelector('input[name="quantity"]');
-    const price = {{pfume.Price}};
-    const totalField = document.getElementById('total_price');
+    const qty = document.getElementById('quantity');
+    const price = {{ pfume.Price }};
+    const total = document.getElementById('total_price');
 
-    qty.addEventListener("input", function(){
-        const q = parseInt(this.value) || 0;
-        totalField.value = q * price;
-    });
-
-    document.querySelector('.menu-btn').addEventListener('click', ()=> {
-        document.querySelector('.nav-links').classList.toggle('active');
+    qty.addEventListener('input', function() {
+        let q = parseInt(qty.value) || 0;
+        total.value = q * price;
     });
 </script>
 <style>

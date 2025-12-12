@@ -14,9 +14,19 @@ class ContactDB(models.Model):
     Message = models.TextField(null=True, blank=True)
 
 class CartDB(models.Model):
-    User_name =models.CharField(max_length=50,null=True,blank=True)
+    User_Name =models.CharField(max_length=50,null=True,blank=True)
     Perfume_Name =models.CharField(max_length=50,null=True,blank=True)
     Quantity = models.PositiveIntegerField()
     Price =  models.PositiveIntegerField()
     Total_Price = models.PositiveIntegerField()
     Perfume_Image = models.ImageField(upload_to="Cart Images", null=True, blank=True)
+
+class OrderDB(models.Model):
+    First_Name =models.CharField(max_length=50,null=True,blank=True)
+    Last_Name =models.CharField(max_length=50,null=True,blank=True)
+    Address = models.TextField(null=True, blank=True)
+    Place =models.CharField(max_length=50,null=True,blank=True)
+    Post_Code = models.PositiveIntegerField()
+    Phone = models.PositiveIntegerField()
+    Email = models.EmailField(null=True, blank=True)
+    Total_Price =models.PositiveIntegerField()
